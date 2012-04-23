@@ -1,0 +1,181 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 538.0
+	},
+	"console":
+	{
+		"height": 271.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/Installations/eclipse/eclipse.ini",
+		"/D/Programming/WorkingCopies/FirefoxPackages/init_firefox_devenv.au3",
+		"/D/Programming/eth/webshop/.classpath",
+		"/D/Programming/eth/webshop/.gitignore",
+		"/D/Programming/eth/webshop/.cache",
+		"/D/Programming/eth/webshop/test/.gitignore",
+		"/C/Users/Adrian/Documents/WindowsPowerShell/Modules/posh-git/readme.md",
+		"/C/Users/Adrian/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1",
+		"/D/Local/scripts/EnvironmentVariables.txt",
+		"/C/Users/Adrian/Desktop/Readme.txt",
+		"/C/Users/Adrian/Documents/WindowsPowerShell/Modules/posh-git/profile.example.ps1",
+		"/D/Installations/Neo4J/README.txt",
+		"/D/Programming/eth/database_fam/part1/create_introdb2012.sql",
+		"/D/Programming/eth/database_fam/part1/fill_introdb2012.sql",
+		"/D/Programming/eth/kuendig/buerkin/milestone1.txt",
+		"/D/Programming/eth/kuendig/milestone1.txt",
+		"/D/Programming/eth/kuendig/allandre/milestone1.txt",
+		"/F/Installer und Images (Games)/Assassins Creed - Revelations/Assassin's Creed Revelations - Crack/skidrow.nfo",
+		"/D/Programming/eth/kuendig/koradir/hw04/feedback.txt",
+		"/D/Programming/eth/kuendig/koradir/hw04/ppSerie04.cs",
+		"/D/Programming/eth/kuendig/hartunch/milestone1.txt",
+		"/D/Programming/eth/kuendig/students.txt",
+		"/F/Installer und Images (Games)/Assassins Creed - Revelations/Assassin's Creed Revelations - Crack/changelog.txt",
+		"/D/Programming/eth/kuendig/allandre/hw03/problem.txt",
+		"/D/Programming/eth/kuendig/richnerb/hw03/feedback.txt",
+		"/D/Programming/eth/kuendig/schwync/hw03/feedback.txt",
+		"/D/Programming/eth/kuendig/koradir/hw04/Notiz.txt",
+		"/D/Programming/eth/kuendig/allandre/hw03/feedback.txt",
+		"/D/Programming/eth/kuendig/schwync/hw03/Kommentar.txt",
+		"/C/Users/Adrian/AppData/Local/Packages/microsoft.windowscommunicationsapps_8wekyb3d8bbwe/TempState/OpenedAttachments/licence.txt",
+		"/D/Programming/eth/kuendig/lanzm/hw03/feedback.txt",
+		"/D/Programming/eth/kuendig/ngov/hw03/feedback.txt",
+		"/D/Programming/eth/kuendig/koradir/hw03/ppSerie03.cs",
+		"/D/Programming/eth/kuendig/koradir/hw03/feedback.txt",
+		"/D/Programming/eth/kuendig/gruberda/hw03/feedback.txt",
+		"/D/Programming/WorkingCopies/webshop/app/controllers/Application.java",
+		"/D/Programming/eth/kuendig/allandre/hw03/pp_3_pa.csproj",
+		"/D/Programming/WorkingCopies/webshop/project/Build.scala",
+		"/D/Programming/WorkingCopies/blog/Gemfile",
+		"/C/Users/Adrian/Desktop/test.css",
+		"/C/Users/Adrian/AppData/Roaming/Sublime Text 2/Packages/Abacus/Default (Windows).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 256.0,
+	"status_bar_visible": true
+}
