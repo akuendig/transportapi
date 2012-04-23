@@ -11,9 +11,17 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 237.0,
 		"selected_items":
 		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"json",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
 			[
 				"inst",
 				"Package Control: Install Package"
@@ -23,7 +31,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 538.0
+		"width": 514.0
 	},
 	"console":
 	{
@@ -40,6 +48,13 @@
 	},
 	"file_history":
 	[
+		"/D/Programming/WorkingCopies/transportapi/app.coffee",
+		"/D/Programming/WorkingCopies/transportapi/routes/index.coffee",
+		"/D/Programming/WorkingCopies/transportapi/routes/index.js",
+		"/D/Programming/WorkingCopies/transportapi/routes/index.coffe",
+		"/D/Programming/WorkingCopies/transportapi/README.md",
+		"/D/Programming/WorkingCopies/transportapi/package.json",
+		"/D/Programming/WorkingCopies/transportapi/.gitignore",
 		"/D/Installations/eclipse/eclipse.ini",
 		"/D/Programming/WorkingCopies/FirefoxPackages/init_firefox_devenv.au3",
 		"/D/Programming/eth/webshop/.classpath",
