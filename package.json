@@ -18,7 +18,7 @@
   },
 
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script --reporter list"
+    "test": "mocha --reporter list"
   },
 
   "private": true,
@@ -32,7 +32,6 @@
   },
 
   "devDependencies": {
-    "mocha": "0.10.0",
     "should": "0.5.1"
   }
 }
