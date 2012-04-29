@@ -33,6 +33,6 @@
   },
 
   "devDependencies": {
-    "should": "0.5.1"
+    "chai": "0.5.x"
   }
 }

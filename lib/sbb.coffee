@@ -5,7 +5,7 @@ LocationQuery = require './locationQuery'
 class Sbb
   findStation: (name, callback) ->
     query = new LocationQuery()
-    query.forStation(name).get callback
+    query.forStation(name, 'station').get callback
 
   findConnection: (from, to, callback) ->
     join = Futures.join()
@@ -14,8 +14,6 @@ class Sbb
     findStation to, join.add()
 
     join.when (stationFrom, stationTo) ->
-
-
-    stationFrom = new ConnectionQuery()
+      query = new ConnectionQuery()
 
 module.exports = Sbb

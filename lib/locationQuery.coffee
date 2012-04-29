@@ -26,12 +26,19 @@ class LocationQuery extends Query
       .sequence()
       .then (next) =>
         @request next
-      .then (next, err, response, body) ->
+      .then (next, err, response, body) =>
         parser = new Parser()
         parser.parseString body, next
-      .then (next, err, json) ->
-        stations = (a) ->
-        callback(err, json.LocValRes.Station)
-        # callback(err, json.LocValRes.Station['@'])
+      .then (next, err, json) =>
+        stations = json.LocValRes.Station ? []
+        poi = json.LocValRes.Poi ? []
+
+        if not @isArray(stations)
+          stations = [stations]
+
+        if not @isArray(poi)
+          poi = [poi]
+
+        callback(err, (location['@'] for location in stations.concat(poi)))
 
 module.exports = LocationQuery
