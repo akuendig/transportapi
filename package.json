@@ -24,11 +24,12 @@
   "private": true,
 
   "dependencies": {
+    "request": ">=2.9.1",
     "express": "2.5.8",
     "jade": ">= 0.0.1",
     "futures": ">=2.1.0",
     "xml2js": ">=0.1.13",
-    "asyncxml": ">=0.4.0"
+    "xmlbuilder": ">=0.3.0"
   },
 
   "devDependencies": {

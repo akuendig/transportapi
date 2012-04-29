@@ -6,8 +6,8 @@ describe "feature", ->
     (2+2).should.equal 4
 
 describe "SBB", ->
-  it "test", (done) ->
+  it "test", ->
     sbb = new Sbb()
-    sbb.queryConnection "Chur", "Maienfeld", (error, result) ->
-      result.should.equal("Hello")
-      done()
+    body = sbb.buildBody("Chur", "Maienfeld")
+    console.log body
+    body.should.equal("Hello")
