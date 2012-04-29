@@ -15,7 +15,11 @@ class Query
       .attribute('ver', '2.3')
       .attribute('accessId', 'MJXZ841ZfsmqqmSymWhBPy5dMNoqoGsHInHbWJQ5PTUZOJ1rLTkn8vVZOZDFfSe')
 
-  request: ->
+  request: (cb) ->
+    body = @root.doc().toString
+      pretty: true
+      indent: '  '
+
     request
       method: 'POST'
       uri: 'http://xmlfahrplan.sbb.ch/bin/extxml.exe/'
@@ -24,3 +28,10 @@ class Query
         'Accept': 'application/xml'
         'Content-Type': 'application/xml'
       body: body
+      ,
+      cb
+
+  isArray: (o) ->
+    Object.prototype.toString.call(o) is '[object Array]'
+
+module.exports = Query

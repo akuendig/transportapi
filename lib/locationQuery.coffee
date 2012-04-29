@@ -1,4 +1,6 @@
-Query = require "query"
+Query = require './query'
+Futures = require 'futures'
+{Parser} = require 'xml2js'
 
 class LocationQuery extends Query
   SBB_SEARCH = 1
@@ -8,14 +10,28 @@ class LocationQuery extends Query
     address: 'ADR'
     poi: 'POI'
 
-  constructor: ->
-    super()
-
-  forStation: (name) ->
+  forStation: (name, type = 'all') ->
     @root
       .element('LocValReq')
-        .attribute('id', 'from')
+        .attribute('id', 'station')
         .attribute('sMode', SBB_SEARCH)
         .element('ReqLoc')
           .attribute('match', name)
-          .attribute('type', LOCATION_TYPES['all'])
+          .attribute('type', LOCATION_TYPES[type])
+
+    return this;
+
+  get: (callback) ->
+    Futures
+      .sequence()
+      .then (next) =>
+        @request next
+      .then (next, err, response, body) ->
+        parser = new Parser()
+        parser.parseString body, next
+      .then (next, err, json) ->
+        stations = (a) ->
+        callback(err, json.LocValRes.Station)
+        # callback(err, json.LocValRes.Station['@'])
+
+module.exports = LocationQuery
