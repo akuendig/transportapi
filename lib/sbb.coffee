@@ -1,6 +1,6 @@
-{Parser} = require 'xml2js'
 Futures = require 'futures'
 LocationQuery = require './locationQuery'
+ConnectionQuery = require './connectionQuery'
 
 class Sbb
   findStation: (name, callback) ->
@@ -10,10 +10,13 @@ class Sbb
   findConnection: (from, to, callback) ->
     join = Futures.join()
 
-    findStation from, join.add()
-    findStation to, join.add()
+    @findStation from, join.add()
+    @findStation to, join.add()
 
-    join.when (stationFrom, stationTo) ->
+    join.when (fromResult, toResult) ->
       query = new ConnectionQuery()
+
+      # fromResult[0] and toResult[0] are the error
+      query.forStations(fromResult[1][0], toResult[1][0]).get callback
 
 module.exports = Sbb

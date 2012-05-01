@@ -31,7 +31,4 @@ class Query
       ,
       cb
 
-  isArray: (o) ->
-    Object.prototype.toString.call(o) is '[object Array]'
-
 module.exports = Query

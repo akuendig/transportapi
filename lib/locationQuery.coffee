@@ -1,3 +1,4 @@
+Util = require './util'
 Query = require './query'
 Futures = require 'futures'
 {Parser} = require 'xml2js'
@@ -26,19 +27,23 @@ class LocationQuery extends Query
       .sequence()
       .then (next) =>
         @request next
-      .then (next, err, response, body) =>
-        parser = new Parser()
+      .then (next, err, response, body) ->
+        if err? then callback err
+
+        parser = new Parser mergeAttrs: true
         parser.parseString body, next
-      .then (next, err, json) =>
+      .then (next, err, json) ->
+        if err? then callback err
+
         stations = json.LocValRes.Station ? []
         poi = json.LocValRes.Poi ? []
 
-        if not @isArray(stations)
+        if not Util.isArray(stations)
           stations = [stations]
 
-        if not @isArray(poi)
+        if not Util.isArray(poi)
           poi = [poi]
 
-        callback(err, (location['@'] for location in stations.concat(poi)))
+        callback(err, stations.concat poi )
 
 module.exports = LocationQuery

@@ -1,0 +1,618 @@
+{
+    "Overview": {
+        "Date": "20120330",
+        "Departure": {
+            "BasicStop": {
+                "type": "NORMAL",
+                "StAttrList": {
+                    "StAttr": [{
+                        "code": "AGGLO",
+                        "text": "Chur",
+                        "priority": "3"
+                    }, {
+                        "code": "BEZIRK",
+                        "text": "Bezirk Plessur",
+                        "priority": "3"
+                    }, {
+                        "code": "KANTON",
+                        "text": "GR",
+                        "priority": "3"
+                    }, {
+                        "code": "ORTGR",
+                        "text": "4",
+                        "priority": "3"
+                    }, {
+                        "code": "PLZ",
+                        "text": "7000",
+                        "priority": "3"
+                    }, {
+                        "code": "TU",
+                        "text": "0",
+                        "priority": "3"
+                    }, {
+                        "code": "WEMF",
+                        "text": "Chur",
+                        "priority": "3"
+                    }, {
+                        "code": "WG",
+                        "text": "28",
+                        "priority": "3"
+                    }, {
+                        "code": "WR",
+                        "text": "2",
+                        "priority": "3"
+                    }, {
+                        "code": "KB",
+                        "text": "Kursbuchhalt",
+                        "priority": "0",
+                        "type": "attr"
+                    }, {
+                        "code": "RA",
+                        "text": "RT_BHF",
+                        "priority": "999",
+                        "type": "attr"
+                    }]
+                },
+                "Station": {
+                    "name": "Chur",
+                    "x": "9528925",
+                    "y": "46853081",
+                    "type": "WGS84",
+                    "externalId": "008509000#85",
+                    "externalStationNr": "008509000"
+                },
+                "Dep": {
+                    "getIn": "YES",
+                    "Time": "00d10:55:00",
+                    "Platform": {
+                        "Text": "4"
+                    }
+                },
+                "StopPrognosis": {
+                    "Arr": {
+                        "handicappedAccess": "0"
+                    },
+                    "Dep": {
+                        "handicappedAccess": "0"
+                    },
+                    "Status": "SCHEDULED"
+                }
+            }
+        },
+        "Arrival": {
+            "BasicStop": {
+                "type": "NORMAL",
+                "StAttrList": {
+                    "StAttr": [{
+                        "code": "BEZIRK",
+                        "text": "Bezirk Landquart",
+                        "priority": "3"
+                    }, {
+                        "code": "KANTON",
+                        "text": "GR",
+                        "priority": "3"
+                    }, {
+                        "code": "ORTGR",
+                        "text": "7",
+                        "priority": "3"
+                    }, {
+                        "code": "PLZ",
+                        "text": "7304",
+                        "priority": "3"
+                    }, {
+                        "code": "TU",
+                        "text": "0",
+                        "priority": "3"
+                    }, {
+                        "code": "WEMF",
+                        "text": "Maienfeld",
+                        "priority": "3"
+                    }, {
+                        "code": "WG",
+                        "text": "28",
+                        "priority": "3"
+                    }, {
+                        "code": "WR",
+                        "text": "2",
+                        "priority": "3"
+                    }, {
+                        "code": "KB",
+                        "text": "Kursbuchhalt",
+                        "priority": "0",
+                        "type": "attr"
+                    }, {
+                        "code": "RA",
+                        "text": "RT_BHF",
+                        "priority": "999",
+                        "type": "attr"
+                    }]
+                },
+                "Station": {
+                    "name": "Maienfeld",
+                    "x": "9529194",
+                    "y": "47003830",
+                    "type": "WGS84",
+                    "externalId": "008509003#85",
+                    "externalStationNr": "008509003"
+                },
+                "Arr": {
+                    "getOut": "YES",
+                    "Time": "00d11:07:00",
+                    "Platform": {
+                        "Text": "2"
+                    }
+                },
+                "StopPrognosis": {
+                    "Arr": {
+                        "handicappedAccess": "0"
+                    },
+                    "Dep": {
+                        "handicappedAccess": "0"
+                    },
+                    "Status": "SCHEDULED"
+                }
+            }
+        },
+        "Transfers": "0",
+        "Duration": {
+            "Time": "00d00:12:00"
+        },
+        "ServiceDays": {
+            "RegularServiceText": {
+                "Text": "daily"
+            }
+        },
+        "Products": {
+            "Product": {
+                "cat": "R       "
+            }
+        },
+        "ContextURL": {
+            "url": "http://fahrplan.sbb.ch/bin/query.exe/en?seqnr=1&ident=l3.011810206.1335775839&guiVCtrl_connection_detailsOut_select_C1-0&jumpToDetails=yes&guiVCtrl_connection_detailsOut_add_selection=yes"
+        },
+        "XMLHandle": {
+            "url": "http://fweb3p_pds.sbb.ch/bin/query.exe/en?showExtXml=1&xmlId=l3.011810206.1335775839:1:C1-0"
+        }
+    },
+    "Sections": {
+        "ConSection": {
+            "Departure": {
+                "BasicStop": {
+                    "type": "NORMAL",
+                    "StAttrList": {
+                        "StAttr": [{
+                            "code": "AGGLO",
+                            "text": "Chur",
+                            "priority": "3"
+                        }, {
+                            "code": "BEZIRK",
+                            "text": "Bezirk Plessur",
+                            "priority": "3"
+                        }, {
+                            "code": "KANTON",
+                            "text": "GR",
+                            "priority": "3"
+                        }, {
+                            "code": "ORTGR",
+                            "text": "4",
+                            "priority": "3"
+                        }, {
+                            "code": "PLZ",
+                            "text": "7000",
+                            "priority": "3"
+                        }, {
+                            "code": "TU",
+                            "text": "0",
+                            "priority": "3"
+                        }, {
+                            "code": "WEMF",
+                            "text": "Chur",
+                            "priority": "3"
+                        }, {
+                            "code": "WG",
+                            "text": "28",
+                            "priority": "3"
+                        }, {
+                            "code": "WR",
+                            "text": "2",
+                            "priority": "3"
+                        }, {
+                            "code": "KB",
+                            "text": "Kursbuchhalt",
+                            "priority": "0",
+                            "type": "attr"
+                        }, {
+                            "code": "RA",
+                            "text": "RT_BHF",
+                            "priority": "999",
+                            "type": "attr"
+                        }]
+                    },
+                    "Station": {
+                        "name": "Chur",
+                        "x": "9528925",
+                        "y": "46853081",
+                        "type": "WGS84",
+                        "externalId": "008509000#85",
+                        "externalStationNr": "008509000"
+                    },
+                    "Dep": {
+                        "getIn": "YES",
+                        "Time": "00d10:55:00",
+                        "Platform": {
+                            "Text": "4"
+                        }
+                    },
+                    "StopPrognosis": {
+                        "Arr": {
+                            "handicappedAccess": "0"
+                        },
+                        "Dep": {
+                            "handicappedAccess": "0"
+                        },
+                        "Status": "SCHEDULED"
+                    }
+                }
+            },
+            "Journey": {
+                "JHandle": {
+                    "tNr": "1638",
+                    "cycle": "1",
+                    "puic": "85"
+                },
+                "JourneyAttributeList": {
+                    "JourneyAttribute": [{
+                        "from": "0",
+                        "to": "2",
+                        "Attribute": {
+                            "type": "NAME",
+                            "AttributeVariant": {
+                                "type": "NORMAL",
+                                "Text": "R 7846"
+                            }
+                        }
+                    }, {
+                        "from": "0",
+                        "to": "2",
+                        "Attribute": {
+                            "type": "CATEGORY",
+                            "code": "5",
+                            "AttributeVariant": [{
+                                "type": "SHORT",
+                                "Text": "R"
+                            }, {
+                                "type": "NORMAL",
+                                "Text": "R"
+                            }, {
+                                "type": "LONG",
+                                "Text": "Regio"
+                            }]
+                        }
+                    }, {
+                        "from": "0",
+                        "to": "2",
+                        "Attribute": {
+                            "type": "NUMBER",
+                            "AttributeVariant": {
+                                "type": "NORMAL",
+                                "Text": "7846"
+                            }
+                        }
+                    }, {
+                        "from": "0",
+                        "to": "2",
+                        "Attribute": {
+                            "type": "ADMINISTRATION",
+                            "AttributeVariant": {
+                                "type": "NORMAL",
+                                "Text": "000011"
+                            }
+                        }
+                    }]
+                },
+                "PassList": {
+                    "BasicStop": [{
+                        "index": "0",
+                        "type": "NORMAL",
+                        "StAttrList": {
+                            "StAttr": [{
+                                "code": "AGGLO",
+                                "text": "Chur",
+                                "priority": "3"
+                            }, {
+                                "code": "BEZIRK",
+                                "text": "Bezirk Plessur",
+                                "priority": "3"
+                            }, {
+                                "code": "KANTON",
+                                "text": "GR",
+                                "priority": "3"
+                            }, {
+                                "code": "ORTGR",
+                                "text": "4",
+                                "priority": "3"
+                            }, {
+                                "code": "PLZ",
+                                "text": "7000",
+                                "priority": "3"
+                            }, {
+                                "code": "TU",
+                                "text": "0",
+                                "priority": "3"
+                            }, {
+                                "code": "WEMF",
+                                "text": "Chur",
+                                "priority": "3"
+                            }, {
+                                "code": "WG",
+                                "text": "28",
+                                "priority": "3"
+                            }, {
+                                "code": "WR",
+                                "text": "2",
+                                "priority": "3"
+                            }, {
+                                "code": "KB",
+                                "text": "Kursbuchhalt",
+                                "priority": "0",
+                                "type": "attr"
+                            }, {
+                                "code": "RA",
+                                "text": "RT_BHF",
+                                "priority": "999",
+                                "type": "attr"
+                            }]
+                        },
+                        "Station": {
+                            "name": "Chur",
+                            "x": "9528925",
+                            "y": "46853081",
+                            "type": "WGS84",
+                            "externalId": "008509000#85",
+                            "externalStationNr": "008509000"
+                        },
+                        "Dep": {
+                            "getIn": "YES",
+                            "Time": "00d10:55:00",
+                            "Platform": {
+                                "Text": {}
+                            }
+                        },
+                        "StopPrognosis": {
+                            "Arr": {
+                                "handicappedAccess": "0"
+                            },
+                            "Dep": {
+                                "handicappedAccess": "0"
+                            },
+                            "Status": "SCHEDULED"
+                        }
+                    }, {
+                        "index": "1",
+                        "type": "NORMAL",
+                        "StAttrList": {
+                            "StAttr": [{
+                                "code": "AGGLO",
+                                "text": "Chur",
+                                "priority": "3"
+                            }, {
+                                "code": "BEZIRK",
+                                "text": "Bezirk Landquart",
+                                "priority": "3"
+                            }, {
+                                "code": "KANTON",
+                                "text": "GR",
+                                "priority": "3"
+                            }, {
+                                "code": "ORTGR",
+                                "text": "6",
+                                "priority": "3"
+                            }, {
+                                "code": "PLZ",
+                                "text": "7302",
+                                "priority": "3"
+                            }, {
+                                "code": "TU",
+                                "text": "0",
+                                "priority": "3"
+                            }, {
+                                "code": "WEMF",
+                                "text": "Igis",
+                                "priority": "3"
+                            }, {
+                                "code": "WG",
+                                "text": "28",
+                                "priority": "3"
+                            }, {
+                                "code": "WR",
+                                "text": "2",
+                                "priority": "3"
+                            }, {
+                                "code": "KB",
+                                "text": "Kursbuchhalt",
+                                "priority": "0",
+                                "type": "attr"
+                            }, {
+                                "code": "RA",
+                                "text": "RT_BHF",
+                                "priority": "999",
+                                "type": "attr"
+                            }]
+                        },
+                        "Station": {
+                            "name": "Landquart",
+                            "x": "9554032",
+                            "y": "46967442",
+                            "type": "WGS84",
+                            "externalId": "008509002#85",
+                            "externalStationNr": "008509002"
+                        },
+                        "Arr": {
+                            "getOut": "YES",
+                            "Time": "00d11:03:00",
+                            "Platform": {
+                                "Text": {}
+                            }
+                        },
+                        "Dep": {
+                            "getIn": "YES",
+                            "Time": "00d11:04:00",
+                            "Platform": {
+                                "Text": {}
+                            }
+                        }
+                    }, {
+                        "index": "2",
+                        "type": "NORMAL",
+                        "StAttrList": {
+                            "StAttr": [{
+                                "code": "BEZIRK",
+                                "text": "Bezirk Landquart",
+                                "priority": "3"
+                            }, {
+                                "code": "KANTON",
+                                "text": "GR",
+                                "priority": "3"
+                            }, {
+                                "code": "ORTGR",
+                                "text": "7",
+                                "priority": "3"
+                            }, {
+                                "code": "PLZ",
+                                "text": "7304",
+                                "priority": "3"
+                            }, {
+                                "code": "TU",
+                                "text": "0",
+                                "priority": "3"
+                            }, {
+                                "code": "WEMF",
+                                "text": "Maienfeld",
+                                "priority": "3"
+                            }, {
+                                "code": "WG",
+                                "text": "28",
+                                "priority": "3"
+                            }, {
+                                "code": "WR",
+                                "text": "2",
+                                "priority": "3"
+                            }, {
+                                "code": "KB",
+                                "text": "Kursbuchhalt",
+                                "priority": "0",
+                                "type": "attr"
+                            }, {
+                                "code": "RA",
+                                "text": "RT_BHF",
+                                "priority": "999",
+                                "type": "attr"
+                            }]
+                        },
+                        "Station": {
+                            "name": "Maienfeld",
+                            "x": "9529194",
+                            "y": "47003830",
+                            "type": "WGS84",
+                            "externalId": "008509003#85",
+                            "externalStationNr": "008509003"
+                        },
+                        "Arr": {
+                            "getOut": "YES",
+                            "Time": "00d11:07:00",
+                            "Platform": {
+                                "Text": {}
+                            }
+                        },
+                        "StopPrognosis": {
+                            "Arr": {
+                                "handicappedAccess": "0"
+                            },
+                            "Dep": {
+                                "handicappedAccess": "0"
+                            },
+                            "Status": "SCHEDULED"
+                        }
+                    }]
+                },
+                "JProg": {
+                    "JStatus": "SCHEDULED"
+                }
+            },
+            "Arrival": {
+                "BasicStop": {
+                    "type": "NORMAL",
+                    "StAttrList": {
+                        "StAttr": [{
+                            "code": "BEZIRK",
+                            "text": "Bezirk Landquart",
+                            "priority": "3"
+                        }, {
+                            "code": "KANTON",
+                            "text": "GR",
+                            "priority": "3"
+                        }, {
+                            "code": "ORTGR",
+                            "text": "7",
+                            "priority": "3"
+                        }, {
+                            "code": "PLZ",
+                            "text": "7304",
+                            "priority": "3"
+                        }, {
+                            "code": "TU",
+                            "text": "0",
+                            "priority": "3"
+                        }, {
+                            "code": "WEMF",
+                            "text": "Maienfeld",
+                            "priority": "3"
+                        }, {
+                            "code": "WG",
+                            "text": "28",
+                            "priority": "3"
+                        }, {
+                            "code": "WR",
+                            "text": "2",
+                            "priority": "3"
+                        }, {
+                            "code": "KB",
+                            "text": "Kursbuchhalt",
+                            "priority": "0",
+                            "type": "attr"
+                        }, {
+                            "code": "RA",
+                            "text": "RT_BHF",
+                            "priority": "999",
+                            "type": "attr"
+                        }]
+                    },
+                    "Station": {
+                        "name": "Maienfeld",
+                        "x": "9529194",
+                        "y": "47003830",
+                        "type": "WGS84",
+                        "externalId": "008509003#85",
+                        "externalStationNr": "008509003"
+                    },
+                    "Arr": {
+                        "getOut": "YES",
+                        "Time": "00d11:07:00",
+                        "Platform": {
+                            "Text": "2"
+                        }
+                    },
+                    "StopPrognosis": {
+                        "Arr": {
+                            "handicappedAccess": "0"
+                        },
+                        "Dep": {
+                            "handicappedAccess": "0"
+                        },
+                        "Status": "SCHEDULED"
+                    }
+                }
+            }
+        }
+    }
+}
