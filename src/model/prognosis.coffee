@@ -3,13 +3,13 @@ Util = require './../util'
 module.exports = class Prognosis
   constructor: (rawJson, date) ->
     if rawJson.Time?
-      @time = Util.parseOffsetTime rawJson.Time, date
+      @time = Util.parseOffsetTime(rawJson.Time, date).toJSON()
     if rawJson.Status?
       @status = rawJson.Status
     if rawJson.Platform?
       @platform = rawJson.Platform.Text
 
-    if rawJson.handicappedAccess?.Time?
+    if rawJson.handicappedAccess?
       @handicapped = rawJson.handicappedAccess is 1
 
     if rawJson.Capacity1st?

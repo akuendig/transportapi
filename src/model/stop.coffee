@@ -7,7 +7,7 @@ module.exports = class Stop extends Station
     super(rawJson.Station)
 
     if rawJson.Dep?.Time?
-      @depTime = Util.parseOffsetTime(rawJson.Dep.Time, date)
+      @depTime = Util.parseOffsetTime(rawJson.Dep.Time, date).toJSON()
     if typeof rawJson.Dep?.Platform?.Text is 'string'
       @depPlatform = rawJson.Dep.Platform.Text
     if rawJson.StopPrognosis?.Dep?.Time? or
@@ -16,8 +16,7 @@ module.exports = class Stop extends Station
       @depPrognosis = new Prognosis(rawJson.StopPrognosis.Dep, date)
 
     if rawJson.Arr?.Time?
-      @arrTime = Util.parseOffsetTime(rawJson.Arr.Time, date)
-
+      @arrTime = Util.parseOffsetTime(rawJson.Arr.Time, date).toJSON()
     if typeof rawJson.Arr?.Platform?.Text is 'string'
       @arrPlatform = rawJson.Arr.Platform.Text
     if rawJson.StopPrognosis?.Arr.Time? or
