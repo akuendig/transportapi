@@ -2,6 +2,7 @@ Futures = require 'futures'
 {Parser} = require 'xml2js'
 Query = require './query'
 Connection = require './model/connection'
+Transportation = require './model/transportation'
 
 module.exports = class ConnectionQuery extends Query
   DATE_TYPE_DEPARTURE = 0
@@ -10,17 +11,34 @@ module.exports = class ConnectionQuery extends Query
   SEARCH_MODE_NORMAL = 'N'
   SEARCH_MODE_ECONOMIC = 'P'
 
-  forStations: (from, to) ->
-    connection = @root.element('ConReq')
+  defaults =
+    via: []
+    time: new Date()
+    transportations: 'all'
+    changeCount: -1
+    limit: 4
+    direct: false
+    sleeper: false
+    couchette: false
+    bike: false
 
-    @addStart(connection, from)
-    @addDestination(connection, to)
-    @addTime(connection)
-    @addFlags(connection)
+  forStations: (from, to, options = defaults) ->
+    @to = to
+    @from = from
+    @trans = Transportation.reduce(options.transportations)
+    @options = options
+    @connection = @root.element('ConReq')
+
+    @addStart()
+    @addDestination()
+    @addTime()
+    @addFlags()
 
     return this
 
   get: (callback) ->
+    return if not typeof callback is 'function'
+
     Futures
       .sequence()
       .then (next) =>
@@ -40,27 +58,46 @@ module.exports = class ConnectionQuery extends Query
 
         callback err, connections.map (connection) -> new Connection(connection)
 
-  addStart: (parent, from) ->
-    parent
-      .element('Start')
-        .element('Station')
-          .attribute('name', from.name)
-          .attribute('externalId', from.externalId)
-        .up()
-        .element('Prod', '1111111111111111').up()
-      .up()
+  addStart: ->
+    start =
+      @connection.element('Start')
+    prod =
+      start.element('Prod', @trans)
+    station =
+      start
+      .element('Station')
+        .attribute('name', @from.name)
+        .attribute('externalId', @from.externalId)
 
-  addDestination: (parent, to) ->
-    parent
-      .element('Dest')
+    if @options.direct then prod.attribute('direct', 1)
+    if @options.sleeper then prod.attribute('sleeper', 1)
+    if @options.couchette then prod.attribute('couchette', 1)
+    if @options.bike then prod.attribute('bike', 1)
+
+  addVia: ->
+    for via in options.via
+      via =
+        @connection.element('Via')
+      prod =
+        via.element('Prod', @trans)
+      station =
+        via
+        .element('Station')
+          .attribute('name', via.name)
+          .attribute('externalId', via.externalId)
+
+  addDestination: ->
+    destination =
+      @connection.element('Dest')
+    prod =
+      station.element('Prod', @trans)
+    station =
+      destination
         .element('Station')
           .attribute('name', to.name)
           .attribute('externalId', to.externalId)
-        .up()
-        .element('Prod', '1111111111111111').up()
-      .up()
 
-  addTime: (parent) ->
+  addTime: ->
     date = new Date()
 
     year = date.getFullYear().toString()
@@ -71,18 +108,24 @@ module.exports = class ConnectionQuery extends Query
     day = date.getDate().toString()
     day = '0' + day if day.length is 1
 
-    parent
+    time =
+      @connection
       .element('ReqT')
-      .attribute('a', DATE_TYPE_DEPARTURE)
-      .attribute('date', year + month + day)
-      .attribute('time', date.getHours() + ':' + date.getMinutes())
-      .up()
+        .attribute('a', DATE_TYPE_DEPARTURE)
+        .attribute('date', year + month + day)
+        .attribute('time', date.getHours() + ':' + date.getMinutes())
 
-  addFlags: (parent) ->
-    parent
+  addFlags: ->
+    flags =
+      @connection
       .element('RFlags')
-      .attribute('b', 0)
-      .attribute('f', 4)
-      .attribute('sMode', SEARCH_MODE_NORMAL)
-      .up()
+        .attribute('b', 0)
+        .attribute('f', 4)
+        .attribute('sMode', SEARCH_MODE_NORMAL)
+
+    if @options.changeCount > -1
+      flags.attribute('nrChanges', @options.changeCount)
+
+    if 0 < @options.changeExtensionPercent < 1
+      flags.attribute('chExtension', @options.changeExtensionPercent)
 

@@ -1,4 +1,6 @@
 Query = require './query'
+Station = require './model/station'
+Coordinate = require './model/coordinate'
 Futures = require 'futures'
 {Parser} = require 'xml2js'
 
@@ -10,7 +12,7 @@ module.exports = class LocationQuery extends Query
     address: 'ADR'
     poi: 'POI'
 
-  forStation: (name, type = 'all') ->
+  for: (name, type = 'all') ->
     @root
       .element('LocValReq')
         .attribute('id', 'station')
@@ -21,7 +23,18 @@ module.exports = class LocationQuery extends Query
 
     return this;
 
+  forStation: (name) ->
+    @for(name, 'station')
+
+  forAddress: (name) ->
+    @for(name, 'address')
+
+  forPoi: (name) ->
+    @for(name, 'poi')
+
   get: (callback) ->
+    return if not typeof callback is 'function'
+
     Futures
       .sequence()
       .then (next) =>
@@ -34,13 +47,16 @@ module.exports = class LocationQuery extends Query
       .then (next, err, json) ->
         if err? then callback err
 
+        pois = json.LocValRes.Poi ? []
+        pois = [pois] if not Array.isArray pois
+        pois = pois.map (st) -> new Coordinate(st)
+
         stations = json.LocValRes.Station ? []
-        poi = json.LocValRes.Poi ? []
+        stations = [stations] if not Array.isArray stations
+        stations = stations.map (st) -> new Station(st)
 
-        if not Array.isArray(stations)
-          stations = [stations]
+        addresses = json.LocValRes.Address ? []
+        addresses = [addresses] if not Array.isArray addresses
+        addresses = addresses.map (st) -> new Coordinate(st)
 
-        if not Array.isArray(poi)
-          poi = [poi]
-
-        callback(err, stations.concat poi )
+        callback(err, pois.concat(stations).concat(addresses))
