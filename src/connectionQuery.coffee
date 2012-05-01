@@ -1,10 +1,9 @@
 Futures = require 'futures'
 {Parser} = require 'xml2js'
-Util = require './util'
 Query = require './query'
 Connection = require './model/connection'
 
-class ConnectionQuery extends Query
+module.exports = class ConnectionQuery extends Query
   DATE_TYPE_DEPARTURE = 0
   DATE_TYPE_ARRIVAL = 1
 
@@ -36,7 +35,7 @@ class ConnectionQuery extends Query
 
         connections = json.ConRes.ConnectionList.Connection
 
-        if not Util.isArray connections
+        if not Array.isArray connections
           connections = [connections]
 
         callback err, connections.map (connection) -> new Connection(connection)
@@ -87,4 +86,3 @@ class ConnectionQuery extends Query
       .attribute('sMode', SEARCH_MODE_NORMAL)
       .up()
 
-module.exports = ConnectionQuery

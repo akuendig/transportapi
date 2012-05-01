@@ -1,30 +1,28 @@
 Stop = require './stop'
-Util = require './../util'
 
-class Journey
+module.exports = class Journey
   constructor: (rawJson) ->
     if rawJson.JourneyAttributeList?.JourneyAttribute?
       for journey in rawJson.JourneyAttributeList.JourneyAttribute
-        switch journey.type
+        switch journey.Attribute.type
           when 'NAME'
             @name = journey.Attribute.AttributeVariant.Text
           when 'CATEGORY'
-            @category
+            journey.Attribute.AttributeVariant.forEach (el) =>
+              @category = el.Text if el.type is 'NORMAL'
           when 'INTERNALCATEGORY'
-            @subcategory
+            @subcategory = journey.Attribute.AttributeVariant.Text
           when 'NUMBER'
-            @number
+            @number = journey.Attribute.AttributeVariant.Text
           when 'OPERATOR'
-            @operator
+            @operator = journey.Attribute.AttributeVariant.Text
           when 'DIRECTION'
-            @to
+            @to = journey.Attribute.AttributeVariant.Text
 
     if rawJson.PassList?.BasicStop?
       passList = rawJson.PassList.BasicStop
 
-      if not Util.isArray passList
+      if not Array.isArray passList
         passList = [passList]
 
       @passList = rawJson.PassList.BasicStop.map (stop) -> new Stop(stop)
-
-module.exports = Journey

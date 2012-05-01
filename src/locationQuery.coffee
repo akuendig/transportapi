@@ -1,9 +1,8 @@
-Util = require './util'
 Query = require './query'
 Futures = require 'futures'
 {Parser} = require 'xml2js'
 
-class LocationQuery extends Query
+module.exports = class LocationQuery extends Query
   SBB_SEARCH = 1
   LOCATION_TYPES =
     all: 'ALLTYPE'
@@ -38,12 +37,10 @@ class LocationQuery extends Query
         stations = json.LocValRes.Station ? []
         poi = json.LocValRes.Poi ? []
 
-        if not Util.isArray(stations)
+        if not Array.isArray(stations)
           stations = [stations]
 
-        if not Util.isArray(poi)
+        if not Array.isArray(poi)
           poi = [poi]
 
         callback(err, stations.concat poi )
-
-module.exports = LocationQuery

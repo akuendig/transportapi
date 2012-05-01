@@ -24,13 +24,3 @@ describe 'Util', ->
     it 'should parse 20110330', ->
       time = new Date 2011, 3, 30
       expect(Util.parseYmdDate('20110330').toLocaleString()).to.equal time.toLocaleString()
-
-  describe '.isArray', ->
-    it 'should return true for [], [1, 2, 3], [{}] and "Hello"', ->
-      expect(Util.isArray []).to.be.true
-      expect(Util.isArray [1, 2, 3]).to.be.true
-      expect(Util.isArray [{}]).to.be.true
-
-    it 'should return false for null and {}', ->
-      expect(Util.isArray(null)).to.be.false
-      expect(Util.isArray({})).to.be.false

@@ -1,16 +1,14 @@
 Walk = require './walk'
 Journey = require './journey'
-Station = require './station'
+Stop = require './stop'
 
-class Section
+module.exports = class Section
   constructor: (rawJson) ->
-    @departure = new Station(rawJson.Departure.BasicStop)
-    @arrival = new Station(rawJson.Arrival.BasicStop)
+    @departure = new Stop(rawJson.Departure.BasicStop)
+    @arrival = new Stop(rawJson.Arrival.BasicStop)
 
     if rawJson.Journey?
       @journey = new Journey(rawJson.Journey)
 
     if rawJson.Walk?
       @walk = new Walk(rawJson.Walk)
-
-module.exports = Section

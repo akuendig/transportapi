@@ -1,7 +1,4 @@
 
-isArray = (o) ->
-  Object.prototype.toString.call(o) is '[object Array]'
-
 # format: 00d10:55:00
 parseOffsetTime = (timeString, base = new Date()) ->
   time = new Date()
@@ -24,6 +21,5 @@ parseYmdDate = (dateString) ->
 
   new Date year, month, day
 
-module.exports.isArray = isArray
 module.exports.parseOffsetTime = parseOffsetTime
 module.exports.parseYmdDate = parseYmdDate

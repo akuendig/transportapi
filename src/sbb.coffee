@@ -2,7 +2,7 @@ Futures = require 'futures'
 LocationQuery = require './locationQuery'
 ConnectionQuery = require './connectionQuery'
 
-class Sbb
+module.exports = class Sbb
   findStation: (name, callback) ->
     query = new LocationQuery()
     query.forStation(name, 'station').get callback
@@ -18,5 +18,3 @@ class Sbb
 
       # fromResult[0] and toResult[0] are the error
       query.forStations(fromResult[1][0], toResult[1][0]).get callback
-
-module.exports = Sbb
