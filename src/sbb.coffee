@@ -7,19 +7,23 @@ namespace = exports ? this
 
 namespace.getLocation = (name, callback) ->
   query = new LocationQuery()
-  query.for(name).get(callback)
+  query.forName(name).get(callback)
+
+namespace.getCoordinates = (x, y, callback) ->
+  query = new LocationQuery()
+  query.forCoordinates(x, y).get(callback)
 
 namespace.getStation = (name, callback) ->
   query = new LocationQuery()
-  query.forStation(name).get callback
+  query.forName(name, 'station').get(callback)
 
 namespace.getAddress = (name, callback) ->
   query = new LocationQuery()
-  query.forAddress(name).get(callback)
+  query.forName(name, 'address').get(callback)
 
 namespace.getPoi = (name, callback) ->
   query = new LocationQuery()
-  query.forPoi(name).get(callback)
+  query.forName(name, 'poi').get(callback)
 
 namespace.getBoard = (name, callback) ->
   Futures

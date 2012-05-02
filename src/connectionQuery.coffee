@@ -30,7 +30,7 @@ module.exports = class ConnectionQuery extends Query
     Util.deepExtend(@options, defaults)
 
     @trans = Transportation.reduce(@options.transportations)
-    @connection = @root.element('ConReq')
+    @request = @beginXml().element('ConReq')
 
     @options.limit = 4 if not 0 < @options.limit < 7
     @options.changePercent = -1 if not 0 <= @options.changePercent <= 1
@@ -48,7 +48,7 @@ module.exports = class ConnectionQuery extends Query
     Futures
       .sequence()
       .then (next) =>
-        @request(next)
+        @fetch(next)
       .then (next, err, response, body) =>
         if err? then return callback(err)
 
@@ -66,7 +66,7 @@ module.exports = class ConnectionQuery extends Query
 
   addStart: ->
     start =
-      @connection.element('Start')
+      @request.element('Start')
     prod =
       start.element('Prod', @trans)
     station =
@@ -83,7 +83,7 @@ module.exports = class ConnectionQuery extends Query
   addVia: ->
     for via in options.via
       via =
-        @connection
+        @request
         .element('Via')
           .element('Prod', @trans)
           .up()
@@ -93,7 +93,7 @@ module.exports = class ConnectionQuery extends Query
 
   addDestination: ->
     destination =
-      @connection
+      @request
       .element('Dest')
         .element('Prod', @trans)
         .up()
@@ -103,7 +103,7 @@ module.exports = class ConnectionQuery extends Query
 
   addTime: ->
     time =
-      @connection
+      @request
       .element('ReqT')
         .attribute('a', DATE_TYPES.departure)
         .attribute('date', Util.dateToYmd(@options.time))
@@ -111,7 +111,7 @@ module.exports = class ConnectionQuery extends Query
 
   addFlags: ->
     flags =
-      @connection
+      @request
       .element('RFlags')
         .attribute('b', 0)
         .attribute('f', @options.limit)

@@ -34,6 +34,13 @@ describe 'Sbb', ->
         expect(result[0]).to.have.property 'name', 'Chur, Apollo (Kino)'
         done(error)
 
+    it 'should finde Zürich HB by coordinates', (done) ->
+      Sbb.getCoordinates 8540192, 47378177, (error, result) ->
+        console.log result
+        expect(result[0]).to.contain.keys 'name', 'externalId', 'externalStationNr', 'type', 'x', 'y'
+        expect(result[0]).to.have.property 'name', 'Zürich HB'
+        done(error)
+
   describe '.getConnection', ->
     it 'should get a connection from Chur to Maienfeld', (done) ->
       Sbb.getConnection 'Chur', 'Maienfeld', (error, result) ->

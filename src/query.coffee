@@ -2,10 +2,12 @@ request = require "request"
 xmlbuilder = require "xmlbuilder"
 
 module.exports = class Query
+  isJson: false
 
-  constructor: ->
-    @root =
-      xmlbuilder
+  beginXml: ->
+    @isJson = false
+
+    return xmlbuilder
       .create()
       .begin "ReqC",
         version: "1.0"
@@ -15,16 +17,31 @@ module.exports = class Query
       .attribute('ver', '2.3')
       .attribute('accessId', 'MJXZ841ZfsmqqmSymWhBPy5dMNoqoGsHInHbWJQ5PTUZOJ1rLTkn8vVZOZDFfSe')
 
-  request: (cb) ->
-    body = @root.doc().toString(indent: '  ')
+  fetch: (cb) ->
+    if @isJson
+      @requestJson(cb, @request)
+    else
+      @requestXml(cb, @request.doc().toString())
 
+  requestXml: (cb, xml) ->
     request
       method: 'POST'
-      uri: 'http://xmlfahrplan.sbb.ch/bin/extxml.exe/'
+      uri: 'http://fahrplan.sbb.ch/bin/extxml.exe'
       headers:
         'User-Agent': 'SBBMobile/4.2 CFNetwork/485.13.9 Darwin/11.0.0'
         'Accept': 'application/xml'
         'Content-Type': 'application/xml'
-      body: body
+      body: xml
+      ,
+      cb
+
+  requestJson: (cb, json) ->
+    request
+      method: 'POST'
+      uri: 'http://fahrplan.sbb.ch/bin/query.exe/dny'
+      headers:
+        'User-Agent': 'SBBMobile/4.2 CFNetwork/485.13.9 Darwin/11.0.0'
+        'Accept': 'application/json'
+      json: json
       ,
       cb

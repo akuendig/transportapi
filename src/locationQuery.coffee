@@ -1,3 +1,4 @@
+Util = require './util'
 Query = require './query'
 Station = require './model/station'
 Coordinate = require './model/coordinate'
@@ -12,8 +13,9 @@ module.exports = class LocationQuery extends Query
     address: 'ADR'
     poi: 'POI'
 
-  for: (name, type = 'all') ->
-    @root
+  forName: (name, type = 'all') ->
+    @request =
+      @beginXml()
       .element('LocValReq')
         .attribute('id', 'station')
         .attribute('sMode', SBB_SEARCH)
@@ -23,22 +25,34 @@ module.exports = class LocationQuery extends Query
 
     return this;
 
-  forStation: (name) ->
-    @for(name, 'station')
+  defaults =
+    limit: 20
+    distance: 5000
 
-  forAddress: (name) ->
-    @for(name, 'address')
+  forCoordinates: (x, y, options = defaults)->
+    Util.deepExtend(options, defaults)
 
-  forPoi: (name) ->
-    @for(name, 'poi')
+    @isJson = true
+    @request =
+      'performLocating': 2
+      'tpl': 'stop2json'
+      'look_maxno': options.limit
+      'look_stopclass': 1023 # all, 1<<10 - 1
+      'look_maxdist': options.distance
+      'look_y': x
+      'look_x': y
+
+    return this;
 
   get: (callback) ->
     return if not typeof callback is 'function'
 
+    return @getJson(callback) if @isJson
+
     Futures
       .sequence()
       .then (next) =>
-        @request next
+        @fetch(next)
       .then (next, err, response, body) ->
         if err? then return callback(err)
 
@@ -60,3 +74,13 @@ module.exports = class LocationQuery extends Query
         addresses = addresses.map (st) -> new Coordinate(st)
 
         callback(err, pois.concat(stations).concat(addresses))
+
+  getJson: (callback) ->
+    return if not typeof callback is 'function'
+
+    Futures
+      .sequence()
+      .then (next) =>
+        @fetch(next)
+      .then (next, err, response, body) ->
+        callback(err, body)

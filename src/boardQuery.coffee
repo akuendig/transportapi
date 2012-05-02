@@ -20,13 +20,11 @@ module.exports = class BoardQuery extends Query
     Util.deepExtend(@options, defaults)
     @options.limit = 20 if not 0 < @options.limit < 50
 
-    board =
-      @root
+    @request =
+      @beginXml()
       .element('STBReq')
         .attribute('dateType', DATE_TYPES[@options.type])
         .attribute('maxJourneys', @options.limit)
-
-    board
       .element('Time', Util.dateToHHmm(@options.time))
       .up()
       .element('Period')
@@ -52,7 +50,7 @@ module.exports = class BoardQuery extends Query
     Futures
       .sequence()
       .then (next) =>
-        @request(next)
+        @fetch(next)
       .then (next, err, response, body) =>
         if err? then return callback(err)
 
