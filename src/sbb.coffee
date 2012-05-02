@@ -1,20 +1,45 @@
 Futures = require 'futures'
+BoardQuery = require './boardQuery'
 LocationQuery = require './locationQuery'
 ConnectionQuery = require './connectionQuery'
 
-module.exports = class Sbb
-  findStation: (name, callback) ->
-    query = new LocationQuery()
-    query.forStation(name, 'station').get callback
+namespace = exports ? this
 
-  findConnection: (from, to, callback) ->
-    join = Futures.join()
+namespace.getLocation = (name, callback) ->
+  query = new LocationQuery()
+  query.for(name).get(callback)
 
-    @findStation from, join.add()
-    @findStation to, join.add()
+namespace.getStation = (name, callback) ->
+  query = new LocationQuery()
+  query.forStation(name).get callback
 
-    join.when (fromResult, toResult) ->
-      query = new ConnectionQuery()
+namespace.getAddress = (name, callback) ->
+  query = new LocationQuery()
+  query.forAddress(name).get(callback)
 
-      # fromResult[0] and toResult[0] are the error
-      query.forStations(fromResult[1][0], toResult[1][0]).get callback
+namespace.getPoi = (name, callback) ->
+  query = new LocationQuery()
+  query.forPoi(name).get(callback)
+
+namespace.getBoard = (name, callback) ->
+  Futures
+    .sequence()
+    .then (next) =>
+      @getStation(name, next)
+    .then (next, err, results) =>
+      query = new BoardQuery()
+      query.forStation(results[0]).get(next)
+    .then (next, err, result) =>
+      callback(err, result)
+
+namespace.getConnection = (from, to, callback) ->
+  join = Futures.join()
+
+  @getStation(from, join.add())
+  @getStation(to, join.add())
+
+  join.when (fromResult, toResult) ->
+    query = new ConnectionQuery()
+
+    # fromResult[0] and toResult[0] are the error
+    query.forStations(fromResult[1][0], toResult[1][0]).get(callback)

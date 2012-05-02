@@ -1,7 +1,7 @@
 request = require "request"
 xmlbuilder = require "xmlbuilder"
 
-class Query
+module.exports = class Query
 
   constructor: ->
     @root =
@@ -16,9 +16,7 @@ class Query
       .attribute('accessId', 'MJXZ841ZfsmqqmSymWhBPy5dMNoqoGsHInHbWJQ5PTUZOJ1rLTkn8vVZOZDFfSe')
 
   request: (cb) ->
-    body = @root.doc().toString
-      pretty: true
-      indent: '  '
+    body = @root.doc().toString(indent: '  ')
 
     request
       method: 'POST'
@@ -30,5 +28,3 @@ class Query
       body: body
       ,
       cb
-
-module.exports = Query

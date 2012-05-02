@@ -19,7 +19,7 @@ module.exports = class Stop extends Station
       @arrTime = Util.parseOffsetTime(rawJson.Arr.Time, date).toJSON()
     if typeof rawJson.Arr?.Platform?.Text is 'string'
       @arrPlatform = rawJson.Arr.Platform.Text
-    if rawJson.StopPrognosis?.Arr.Time? or
+    if rawJson.StopPrognosis?.Arr?.Time? or
         rawJson.StopPrognosis?.Arr?.Status? or
         rawJson.StopPrognosis?.Arr?.Platform?
       @arrPrognosis = new Prognosis(rawJson.StopPrognosis.Arr, date)

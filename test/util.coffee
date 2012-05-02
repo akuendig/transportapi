@@ -24,3 +24,25 @@ describe 'Util', ->
     it 'should parse 20110330', ->
       time = new Date 2011, 3, 30
       expect(Util.parseYmdDate('20110330').toLocaleString()).to.equal time.toLocaleString()
+
+  describe '.deepExtend', ->
+    it 'should correctly extend', ->
+      src =
+        a: 1
+        b:
+          c: 2
+      target = {}
+
+      Util.deepExtend(target, src)
+      expect(target).to.eql src
+
+    it 'should not extend existing keys that are no [object]', ->
+      src =
+        a: 1
+        b:
+          c: 2
+      target =
+        b: 2
+
+      Util.deepExtend(target, src)
+      expect(target).to.not.eql src

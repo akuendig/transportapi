@@ -40,12 +40,12 @@ module.exports = class LocationQuery extends Query
       .then (next) =>
         @request next
       .then (next, err, response, body) ->
-        if err? then callback err
+        if err? then return callback(err)
 
-        parser = new Parser mergeAttrs: true
-        parser.parseString body, next
+        parser = new Parser(mergeAttrs: true)
+        parser.parseString(body, next)
       .then (next, err, json) ->
-        if err? then callback err
+        if err? then return callback(err)
 
         pois = json.LocValRes.Poi ? []
         pois = [pois] if not Array.isArray pois

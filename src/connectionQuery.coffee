@@ -1,33 +1,39 @@
 Futures = require 'futures'
 {Parser} = require 'xml2js'
+Util = require './util'
 Query = require './query'
 Connection = require './model/connection'
 Transportation = require './model/transportation'
 
 module.exports = class ConnectionQuery extends Query
-  DATE_TYPE_DEPARTURE = 0
-  DATE_TYPE_ARRIVAL = 1
+  DATE_TYPES =
+    departure: 0
+    arrival: 1
 
-  SEARCH_MODE_NORMAL = 'N'
-  SEARCH_MODE_ECONOMIC = 'P'
+  SEARCH_MODES =
+    normal: 'N'
+    economic: 'P'
 
   defaults =
     via: []
     time: new Date()
     transportations: 'all'
     changeCount: -1
+    changePercent: -1
     limit: 4
     direct: false
     sleeper: false
     couchette: false
     bike: false
 
-  forStations: (from, to, options = defaults) ->
-    @to = to
-    @from = from
-    @trans = Transportation.reduce(options.transportations)
-    @options = options
+  forStations: (@from, @to, @options = defaults) ->
+    Util.deepExtend(@options, defaults)
+
+    @trans = Transportation.reduce(@options.transportations)
     @connection = @root.element('ConReq')
+
+    @options.limit = 4 if not 0 < @options.limit < 7
+    @options.changePercent = -1 if not 0 <= @options.changePercent <= 1
 
     @addStart()
     @addDestination()
@@ -42,14 +48,14 @@ module.exports = class ConnectionQuery extends Query
     Futures
       .sequence()
       .then (next) =>
-        @request next
-      .then (next, err, response, body) ->
-        if err? then callback err
+        @request(next)
+      .then (next, err, response, body) =>
+        if err? then return callback(err)
 
-        parser = new Parser mergeAttrs: true
-        parser.parseString body, next
-      .then (next, err, json) ->
-        if err? then callback err
+        parser = new Parser(mergeAttrs: true)
+        parser.parseString(body, next)
+      .then (next, err, json) =>
+        if err? then return callback(err)
 
         connections = json.ConRes.ConnectionList.Connection
 
@@ -77,55 +83,42 @@ module.exports = class ConnectionQuery extends Query
   addVia: ->
     for via in options.via
       via =
-        @connection.element('Via')
-      prod =
-        via.element('Prod', @trans)
-      station =
-        via
-        .element('Station')
-          .attribute('name', via.name)
-          .attribute('externalId', via.externalId)
+        @connection
+        .element('Via')
+          .element('Prod', @trans)
+          .up()
+          .element('Station')
+            .attribute('name', via.name)
+            .attribute('externalId', via.externalId)
 
   addDestination: ->
     destination =
-      @connection.element('Dest')
-    prod =
-      station.element('Prod', @trans)
-    station =
-      destination
+      @connection
+      .element('Dest')
+        .element('Prod', @trans)
+        .up()
         .element('Station')
-          .attribute('name', to.name)
-          .attribute('externalId', to.externalId)
+          .attribute('name', @to.name)
+          .attribute('externalId', @to.externalId)
 
   addTime: ->
-    date = new Date()
-
-    year = date.getFullYear().toString()
-
-    month = date.getMonth().toString()
-    month = '0' + month if month.length is 1
-
-    day = date.getDate().toString()
-    day = '0' + day if day.length is 1
-
     time =
       @connection
       .element('ReqT')
-        .attribute('a', DATE_TYPE_DEPARTURE)
-        .attribute('date', year + month + day)
-        .attribute('time', date.getHours() + ':' + date.getMinutes())
+        .attribute('a', DATE_TYPES.departure)
+        .attribute('date', Util.dateToYmd(@options.time))
+        .attribute('time', Util.dateToHHmm(@options.time))
 
   addFlags: ->
     flags =
       @connection
       .element('RFlags')
         .attribute('b', 0)
-        .attribute('f', 4)
-        .attribute('sMode', SEARCH_MODE_NORMAL)
+        .attribute('f', @options.limit)
+        .attribute('sMode', SEARCH_MODES.normal)
 
     if @options.changeCount > -1
       flags.attribute('nrChanges', @options.changeCount)
 
-    if 0 < @options.changeExtensionPercent < 1
-      flags.attribute('chExtension', @options.changeExtensionPercent)
-
+    if 0 <= @options.changePercent <= 1
+      flags.attribute('chExtension', @options.changePercent)

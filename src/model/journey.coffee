@@ -2,14 +2,20 @@ Stop = require './stop'
 
 module.exports = class Journey
   constructor: (rawJson) ->
+    if rawJson.MainStop?.BasicStop?
+      @station = new Stop(rawJson.MainStop.BasicStop)
+
     if rawJson.JourneyAttributeList?.JourneyAttribute?
       for journey in rawJson.JourneyAttributeList.JourneyAttribute
         switch journey.Attribute.type
           when 'NAME'
             @name = journey.Attribute.AttributeVariant.Text
           when 'CATEGORY'
-            journey.Attribute.AttributeVariant.forEach (el) =>
-              @category = el.Text if el.type is 'NORMAL'
+            if Array.isArray(journey.Attribute.AttributeVariant)
+              journey.Attribute.AttributeVariant.forEach (el) =>
+                @category = el.Text if el.type is 'NORMAL'
+            else
+              @category = journey.Attribute.AttributeVariant.Text
           when 'INTERNALCATEGORY'
             @subcategory = journey.Attribute.AttributeVariant.Text
           when 'NUMBER'
