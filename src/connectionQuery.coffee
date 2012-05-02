@@ -1,3 +1,4 @@
+request = require 'request'
 Futures = require 'futures'
 {Parser} = require 'xml2js'
 Util = require './util'
@@ -48,7 +49,13 @@ module.exports = class ConnectionQuery extends Query
     Futures
       .sequence()
       .then (next) =>
-        @fetch(next)
+        req =
+          uri: @XML_URI
+          method: 'POST'
+          headers: @XML_HEADERS
+          body: @request.doc().toString()
+
+        request(req, next)
       .then (next, err, response, body) =>
         if err? then return callback(err)
 

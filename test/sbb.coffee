@@ -36,8 +36,7 @@ describe 'Sbb', ->
 
     it 'should finde Zürich HB by coordinates', (done) ->
       Sbb.getCoordinates 8540192, 47378177, (error, result) ->
-        console.log result
-        expect(result[0]).to.contain.keys 'name', 'externalId', 'externalStationNr', 'type', 'x', 'y'
+        expect(result[0]).to.contain.keys 'name', 'x', 'y'
         expect(result[0]).to.have.property 'name', 'Zürich HB'
         done(error)
 

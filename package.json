@@ -24,12 +24,13 @@
   "private": true,
 
   "dependencies": {
-    "request": ">=2.9.1",
-    "express": "2.5.8",
-    "jade": ">= 0.0.1",
-    "futures": ">=2.1.0",
-    "xml2js": ">=0.1.13",
-    "xmlbuilder": ">=0.3.0"
+    "request": "2.9.x",
+    "express": "2.5.x",
+    "jade": "0.x",
+    "futures": "2.x",
+    "xml2js": "0.1.x",
+    "xmlbuilder": "0.3.x",
+    "validator": "0.4.x"
   },
 
   "devDependencies": {

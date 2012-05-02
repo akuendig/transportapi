@@ -1,9 +1,11 @@
+request = require 'request'
+Futures = require 'futures'
+{Parser} = require 'xml2js'
+{sanitize} = require('validator')
 Util = require './util'
 Query = require './query'
 Station = require './model/station'
 Coordinate = require './model/coordinate'
-Futures = require 'futures'
-{Parser} = require 'xml2js'
 
 module.exports = class LocationQuery extends Query
   SBB_SEARCH = 1
@@ -39,20 +41,26 @@ module.exports = class LocationQuery extends Query
       'look_maxno': options.limit
       'look_stopclass': 1023 # all, 1<<10 - 1
       'look_maxdist': options.distance
-      'look_y': x
-      'look_x': y
+      'look_x': x
+      'look_y': y
 
     return this;
 
   get: (callback) ->
     return if not typeof callback is 'function'
 
-    return @getJson(callback) if @isJson
+    return @getJson(callback) if @isJson is true
 
     Futures
       .sequence()
       .then (next) =>
-        @fetch(next)
+        req =
+          uri: @XML_URI
+          method: 'POST'
+          headers: @XML_HEADERS
+          body: @request.doc().toString()
+
+        request(req, next)
       .then (next, err, response, body) ->
         if err? then return callback(err)
 
@@ -81,6 +89,19 @@ module.exports = class LocationQuery extends Query
     Futures
       .sequence()
       .then (next) =>
-        @fetch(next)
-      .then (next, err, response, body) ->
-        callback(err, body)
+        req =
+          uri: @JSON_URI
+          method: 'POST'
+          qs: @request
+          headers: @JSON_HEADERS
+
+        request(req, next)
+      .then (next, err, response, body) =>
+        body = sanitize(body).entityDecode()
+        body = body.replace(/(\w+) ?:/g, '"$1":')
+
+        stops = JSON.parse(body).stops
+        if not Array.isArray(stops)
+          stops = [stops]
+
+        callback(err, stops.map (stop) -> new Station(stop))
